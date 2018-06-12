@@ -30,6 +30,7 @@ Pod::Spec.new do |s|
   s.dependency 'YYModel'
   s.dependency 'YTKNetwork'
   s.dependency 'SVProgressHUD'
+  s.dependency 'Masonry'
 
 
   # s.public_header_files = "Classes/**/*.h"
