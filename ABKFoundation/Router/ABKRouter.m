@@ -84,6 +84,7 @@
 
 - (void)openURLString:(NSString *)urlString baseViewController:(UIViewController *)baseViewController parameters:(NSDictionary *)parameters invokeType:(ABKRouterInvokeType)invokeType animated:(BOOL)animated complete:(void (^)(void))complete
 {
+    urlString = [urlString stringByRemovingPercentEncoding];
     if ([self canHandleURLString:urlString]) {
         if (!baseViewController) {
             baseViewController = [UIViewController abk_topMostViewController];
