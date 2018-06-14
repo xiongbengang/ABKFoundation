@@ -14,4 +14,6 @@
 
 + (NSString *)graphForClass:(Class)cls;
 
++ (NSString *)graphForClass:(Class)cls blacklist:(NSArray<NSString *> *)aBlacklist;
+
 @end

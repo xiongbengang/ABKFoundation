@@ -85,20 +85,35 @@
     return valueString;
 }
 
++ (NSSet *)graphBlacklistForClass:(Class)cls blacklist:(NSArray<NSString *> *)blacklist
+{
+    NSMutableArray *graphBlacklist = [NSMutableArray arrayWithArray:@[@"debugDescription", @"description", @"hash", @"superclass"]];
+    if ([cls respondsToSelector:@selector(graphBlacklist)]) {
+        NSArray *customerBlacklist = [cls graphBlacklist];
+        if (customerBlacklist.count) {
+            [graphBlacklist addObjectsFromArray:customerBlacklist];
+        }
+    }
+    if (blacklist.count) {
+        [graphBlacklist addObjectsFromArray:blacklist];
+    }
+    return [NSSet setWithArray:graphBlacklist];
+}
+
 + (NSString *)graphForClass:(Class)cls
 {
-    YYClassInfo *classInfo = [YYClassInfo classInfoWithClass:cls];
+    return [self graphForClass:cls blacklist:nil];
+}
+
++ (NSString *)graphForClass:(Class)cls blacklist:(NSArray<NSString *> *)aBlacklist
+{
     NSDictionary *modelCustomMapper = nil;
     if ([cls respondsToSelector:@selector(modelCustomPropertyMapper)]) {
         modelCustomMapper = [cls modelCustomPropertyMapper];
     }
-    NSSet *blacklist = [NSSet setWithArray:@[@"debugDescription", @"description", @"hash", @"superclass"]];
-    if ([cls respondsToSelector:@selector(graphBlacklist)]) {
-        NSArray *customerBlacklist = [cls graphBlacklist];
-        NSMutableSet *tempSet = [NSMutableSet setWithSet:blacklist];
-        [tempSet addObjectsFromArray:customerBlacklist];
-        blacklist = [tempSet copy];
-    }
+    NSSet *graphBlacklist = [self graphBlacklistForClass:cls blacklist:aBlacklist];
+    
+    YYClassInfo *classInfo = [YYClassInfo classInfoWithClass:cls];
     NSMutableArray *properties = [NSMutableArray arrayWithCapacity:classInfo.propertyInfos.count];
     for (YYClassPropertyInfo *property in classInfo.propertyInfos.allValues) {
         if ([cls respondsToSelector:@selector(graphForProperty:)]) {
@@ -106,7 +121,7 @@
             if (graph) {
                 [properties addObject:graph];
             }
-        } else if ([blacklist containsObject:property.name]) {
+        } else if ([graphBlacklist containsObject:property.name]) {
             continue;
         } else {
             NSString *propertyGraph = property.name;
