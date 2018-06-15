@@ -10,6 +10,12 @@
 
 #define ABKScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define ABKScreenHeight ([UIScreen mainScreen].bounds.size.height)
+#define ABKStatusBarHeight (ABKGetStatusBarHeight())
+#define ABKNavigationBarHeight (44)
+#define ABKNavigationTopHeight (ABKStatusBarHeight+ABKNavigationBarHeight)
+#define ABKSeparatorHeight (1.0/[UIScreen mainScreen].scale)
+
+UIKIT_EXTERN CGFloat ABKGetStatusBarHeight(void);
 
 @interface UIView (ABKAdditions)
 

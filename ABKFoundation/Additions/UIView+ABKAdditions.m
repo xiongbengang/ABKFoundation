@@ -8,6 +8,11 @@
 
 #import "UIView+ABKAdditions.h"
 
+CGFloat ABKGetStatusBarHeight() {
+    CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    return statusBarHeight;
+}
+
 @implementation UIView (ABKAdditions)
 
 - (CGFloat)abk_top
