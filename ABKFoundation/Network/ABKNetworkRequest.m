@@ -51,6 +51,12 @@
     return arguments;
 }
 
+- (void)clearCompletionBlock
+{
+    [super clearCompletionBlock];
+    self.hasPrepared = NO;
+}
+
 - (void)prepare
 {
     if (self.hasPrepared) {
