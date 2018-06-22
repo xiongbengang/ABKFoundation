@@ -20,8 +20,21 @@
 
 @interface ABKOrderSegmentView : UIView
 
+@property (nonatomic, strong) UIView *bottomLine;
+
 @property (nonatomic, strong) UIColor *flagColor;
+@property (nonatomic, assign) CGFloat flagHeight;
+@property (nonatomic, assign) BOOL flagEqualToText;
+
 @property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIColor *selectedTextColor;
+
+@property (nonatomic, strong) UIFont *textFont;
+@property (nonatomic, strong) UIFont *selectedTextFont;
+
+@property (nonatomic, assign) BOOL showVirticalSeparator;
+@property (nonatomic, assign) UIEdgeInsets virticalSeparatorEdgeInsets;
+
 @property (nonatomic, weak) id<ABKOrderSegmentViewDelegate> delegate;
 @property (nonatomic, assign, readonly) NSInteger selectedIndex;
 

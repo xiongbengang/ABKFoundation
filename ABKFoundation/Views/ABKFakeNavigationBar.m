@@ -22,6 +22,7 @@
 
 - (void)setupSubviews
 {
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectZero];
     statusBarView.backgroundColor = [UIColor clearColor];
     [self addSubview:statusBarView];
@@ -57,9 +58,10 @@
     _backButton = backButton;
     
     UILabel *titleLabel = [[UILabel alloc] init];
+    NSDictionary *titleAttributes = [UINavigationBar appearance].titleTextAttributes;
+    titleLabel.font = titleAttributes[NSFontAttributeName] ?: [UIFont systemFontOfSize:20];
+    titleLabel.textColor = titleAttributes[NSForegroundColorAttributeName] ?: [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont systemFontOfSize:17];
-    titleLabel.textColor = [UIColor whiteColor];
     [self addTitleView:titleLabel];
     _titleLabel = titleLabel;
 }

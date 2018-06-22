@@ -57,34 +57,33 @@
             make.top.equalTo(self);
             make.bottom.equalTo(self).offset(1.0/[UIScreen mainScreen].scale);
         }];
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:self.textColor forState:UIControlStateNormal];
+        [btn setTitleColor:self.selectedTextColor ?: self.textColor forState:UIControlStateSelected];
         [btn setTitle:items[i] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:16];
+        btn.titleLabel.font = self.textFont ?: [UIFont systemFontOfSize:16];
         [itemView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(itemView);
         }];
         [btns addObject:btn];
-        if (i != items.count - 1) {
-            [itemView abk_addRightVerticalSeparatorWithInsets:UIEdgeInsetsMake(16, 0, 16, 0)];
+        if (i != items.count - 1 && self.showVirticalSeparator) {
+            UIEdgeInsets edgeInsets = UIEdgeInsetsEqualToEdgeInsets(self.virticalSeparatorEdgeInsets, UIEdgeInsetsZero) ? UIEdgeInsetsMake(16, 0, 16, 0) : self.virticalSeparatorEdgeInsets;
+            [itemView abk_addRightVerticalSeparatorWithInsets:edgeInsets];
         }
         previousView = itemView;
     }
     self.buttons = btns;
     
-    UIView *bottomLine = [self abk_addBottomHorizontalSeparatorWithInsets:UIEdgeInsetsZero];
+    self.bottomLine = [self abk_addBottomHorizontalSeparatorWithInsets:UIEdgeInsetsZero];
+    
     UIView *flagView = [[UIView alloc] init];
     [self addSubview:flagView];
     flagView.backgroundColor = self.flagColor;
-    [flagView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self);
-        make.width.mas_equalTo(self).multipliedBy(multiplier);
-        make.height.mas_equalTo(1);
-        make.bottom.equalTo(bottomLine);
-    }];
     self.flagView = flagView;
+    
+    [self setSelectedIndex:0 animated:NO];
 }
 
 - (IBAction)buttonClick:(UIButton *)sender
@@ -98,17 +97,40 @@
     if (selectedIndex >= self.buttons.count) {
         return;
     }
+    UIButton *lastSelectedButton = self.buttons[self.selectedIndex];
+    lastSelectedButton.selected = NO;
+    lastSelectedButton.titleLabel.font = self.textFont ?: [UIFont systemFontOfSize:16];
+    
     self.selectedIndex = selectedIndex;
+    
+    UIButton *currentSelectedButton = self.buttons[self.selectedIndex];
+    currentSelectedButton.selected = YES;
+    currentSelectedButton.titleLabel.font = self.selectedTextFont ?: currentSelectedButton.titleLabel.font;
+    
     if (animated) {
         [UIView animateWithDuration:0.1 animations:^{
-            [self.flagView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.leading.equalTo(self.flagView.superview).offset(selectedIndex*self.flagView.abk_width);
+            [self.flagView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                if (self.flagEqualToText) {
+                    make.width.mas_equalTo(currentSelectedButton.titleLabel);
+                } else {
+                    make.width.equalTo(self).multipliedBy(1.0/self.buttons.count);
+                }
+                make.height.mas_equalTo(MAX(1, self.flagHeight));
+                make.bottom.equalTo(self.bottomLine.mas_top);
+                make.centerX.equalTo(currentSelectedButton.superview);
             }];
             [self layoutIfNeeded];
         }];
     } else {
-        [self.flagView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.flagView.superview).offset(selectedIndex*self.flagView.abk_width);
+        [self.flagView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            if (self.flagEqualToText) {
+                make.width.mas_equalTo(currentSelectedButton.titleLabel);
+            } else {
+                make.width.equalTo(self).multipliedBy(1.0/self.buttons.count);
+            }
+            make.height.mas_equalTo(MAX(1, self.flagHeight));
+            make.bottom.equalTo(self.bottomLine.mas_top);
+            make.centerX.equalTo(currentSelectedButton.superview);
         }];
     }
     if ([self.delegate respondsToSelector:@selector(segmentView:didSelectAtIndex:)]) {
