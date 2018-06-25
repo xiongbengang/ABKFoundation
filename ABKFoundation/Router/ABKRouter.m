@@ -157,6 +157,7 @@
             viewController = [[viewControllerClass alloc] init];
         }
     }
+    viewController.view.backgroundColor = [UIColor whiteColor];
     if ([viewControllerClass instancesRespondToSelector:@selector(configWithParameters:)]) {
         [viewController configWithParameters:parameters];
     }

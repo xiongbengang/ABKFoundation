@@ -40,4 +40,6 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
 
+- (void)reload;
+
 @end

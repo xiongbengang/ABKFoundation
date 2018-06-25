@@ -37,8 +37,14 @@
     return nil;
 }
 
+- (void)reload
+{
+    [self setupSubviews];
+}
+
 - (void)setupSubviews
 {
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     self.backgroundColor = [UIColor whiteColor];
     NSArray<NSString *> *items = [self segmentItems];
     NSMutableArray *btns = [NSMutableArray arrayWithCapacity:items.count];
