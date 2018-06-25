@@ -14,7 +14,11 @@
 {
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] init];
     for (ABKTextAttribute *textAttribute in attributes) {
-        NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:textAttribute.text attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:textAttribute.fontSize], NSForegroundColorAttributeName: textAttribute.fontColor}];
+        NSMutableDictionary *commonAttributes = [NSMutableDictionary dictionaryWithDictionary:@{NSFontAttributeName: [UIFont systemFontOfSize:textAttribute.fontSize], NSForegroundColorAttributeName: textAttribute.fontColor}];
+        if (textAttribute.otherAttributes.count) {
+            [commonAttributes addEntriesFromDictionary:textAttribute.otherAttributes];
+        }
+        NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:textAttribute.text attributes:commonAttributes];
         [attributeString appendAttributedString:attStr];
     }
     return [[NSAttributedString alloc] initWithAttributedString:attributeString];

@@ -21,6 +21,7 @@
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, strong) UIColor *fontColor;
+@property (nonatomic, copy) NSDictionary *otherAttributes;
 
 + (instancetype)textAttributeWithText:(NSString *)text fontSize:(CGFloat)fontSize fontColor:(UIColor *)fontColor;
 
