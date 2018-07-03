@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size):NO)
+
 #define ABKScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define ABKScreenHeight ([UIScreen mainScreen].bounds.size.height)
 #define ABKStatusBarHeight (ABKGetStatusBarHeight())
