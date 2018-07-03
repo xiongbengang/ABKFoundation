@@ -8,6 +8,9 @@
 
 #import "ABKNetworkRequest.h"
 #import "ABKNetworkIndicatorAccessory.h"
+#ifdef DEBUG
+#import "ABKNetworkLogger.h"
+#endif
 
 @interface ABKNetworkRequest ()
 
@@ -24,6 +27,11 @@
     if (self) {
         ABKNetworkIndicatorAccessory *networkIndicatorAccessort = [[ABKNetworkIndicatorAccessory alloc] init];
         [self addAccessory:networkIndicatorAccessort];
+        
+#ifdef DEBUG
+        ABKNetworkLogger *logger = [[ABKNetworkLogger alloc] init];
+        [self addAccessory:logger];
+#endif
     }
     return self;
 }
@@ -87,10 +95,6 @@
     };
     YTKRequestCompletionBlock oldFailueBlock = [self.failureCompletionBlock copy];
     YTKRequestCompletionBlock faildBlock = ^(ABKNetworkRequest *request) {
-        NSLog(@"*******************************");
-        NSLog(@"request Failed: request: %@", [request description]);
-        NSLog(@"error: %@", request.error);
-        NSLog(@"*******************************");
         if (oldFailueBlock) {
             oldFailueBlock(request);
         }
@@ -144,12 +148,6 @@
 - (void)requestCompletePreprocessor
 {
     [super requestCompletePreprocessor];
-    NSLog(@"*******************************");
-    NSLog(@"------- request:%@", [self description]);
-    NSLog(@"header:%@", self.currentRequest.allHTTPHeaderFields);
-    NSLog(@"------- response:%@", [self.responseJSONObject description]);
-    NSLog(@"*******************************");
-    
     self.responseItem = [ABKNetworkBaseItem modelWithJSON:self.responseJSONObject];
     if ([self.responseJSONObject isKindOfClass:[NSDictionary class]]) {
         id dataJSON = self.responseJSONObject[@"data"];
