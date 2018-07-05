@@ -128,13 +128,21 @@
 - (void)presentWithURLString:(NSString *)urlString baseViewController:(UIViewController *)baseViewController appParameters:(NSDictionary *)appParameters animated:(BOOL)animated complete:(void (^)(void))complete
 {
     UIViewController *viewController = [self responseViewControllerForURLString:urlString appParameters:appParameters];
-    [baseViewController presentViewController:viewController animated:animated completion:complete];
+    if (viewController) {
+        [baseViewController presentViewController:viewController animated:animated completion:complete];
+    } else {
+        NSLog(@"非法的 urlString: %@", urlString);
+    }
 }
 
 - (void)pushWithURLString:(NSString *)urlString baseViewController:(UIViewController *)baseViewController appParameters:(NSDictionary *)appParameters animated:(BOOL)animated
 {
     UIViewController *viewController = [self responseViewControllerForURLString:urlString appParameters:appParameters];
-    [baseViewController.navigationController pushViewController:viewController animated:animated];
+    if (viewController) {
+        [baseViewController.navigationController pushViewController:viewController animated:animated];
+    } else {
+        NSLog(@"非法的 urlString: %@", urlString);
+    }
 }
 
 - (UIViewController *)responseViewControllerForURLString:(NSString *)urlString appParameters:(NSDictionary *)appParameters
