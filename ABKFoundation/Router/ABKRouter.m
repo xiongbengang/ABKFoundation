@@ -34,7 +34,7 @@
     if ([routerConfig respondsToSelector:@selector(routerClassMapper)]) {
         NSDictionary<NSString *, Class> *mapper = [routerConfig routerClassMapper];
         [mapper enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, Class  _Nonnull obj, BOOL * _Nonnull stop) {
-            [self registViewController:obj forModuleName:key];
+            [self registViewController:obj forModuleName:[key lowercaseString]];
         }];
     }
     if ([routerConfig respondsToSelector:@selector(schemes)]) {
@@ -84,7 +84,7 @@
 
 - (void)openURLString:(NSString *)urlString baseViewController:(UIViewController *)baseViewController parameters:(NSDictionary *)parameters invokeType:(ABKRouterInvokeType)invokeType animated:(BOOL)animated complete:(void (^)(void))complete
 {
-    urlString = [urlString stringByRemovingPercentEncoding];
+    urlString = [[urlString stringByRemovingPercentEncoding] lowercaseString];
     if ([self canHandleURLString:urlString]) {
         if (!baseViewController) {
             baseViewController = [UIViewController abk_topMostViewController];

@@ -13,4 +13,8 @@
 
 + (NSString *)decimalStringWithMoney:(NSInteger)money;
 
++ (NSString *)symbolPrefixMoneyString:(NSInteger)money;
+
++ (NSString *)symbolPrefixDecimalMoneyString:(NSInteger)money;
+
 @end

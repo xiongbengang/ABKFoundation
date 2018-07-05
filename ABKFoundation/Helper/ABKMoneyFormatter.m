@@ -25,4 +25,14 @@
     return rs;
 }
 
++ (NSString *)symbolPrefixMoneyString:(NSInteger)money
+{
+    return [NSString stringWithFormat:@"￥%@", [self stringWithMoney:money]];
+}
+
++ (NSString *)symbolPrefixDecimalMoneyString:(NSInteger)money
+{
+    return [NSString stringWithFormat:@"￥%@", [self decimalStringWithMoney:money]];
+}
+
 @end
