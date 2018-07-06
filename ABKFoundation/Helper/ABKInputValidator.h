@@ -10,7 +10,14 @@
 
 @interface ABKInputValidator : NSObject
 
++ (NSString *)stringByTrimString:(NSString *)inputText;
+
 // 仅简单判断长度是否等于11
 + (BOOL)isValidatePhoneNumber:(NSString *)phoneNumber;
+
+// 是否是合法的验证码
++ (BOOL)isValidateSMCode:(NSString *)code;
+
++ (BOOL)isValidateNumber:(NSString *)inputText;
 
 @end
