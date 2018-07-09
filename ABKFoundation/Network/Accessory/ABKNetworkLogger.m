@@ -54,7 +54,10 @@
 
 - (NSString *)abk_responseDescription
 {
-    return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.responseJSONObject options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    if ([NSJSONSerialization isValidJSONObject:self.responseJSONObject]) {
+        return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.responseJSONObject options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    }
+    return @"";
 }
 
 @end
