@@ -72,7 +72,7 @@
     NSMutableArray *keyValueParis = [NSMutableArray arrayWithCapacity:array.count];
     for (id obj in array) {
         if ([obj isKindOfClass:[NSString class]]) {
-            NSString *valueString = [NSString stringWithFormat:@"\"%@\"", valueString];
+            NSString *valueString = [NSString stringWithFormat:@"\"%@\"", obj];
             [keyValueParis addObject:valueString];
         } else if ([obj isKindOfClass:[NSNumber class]]) {
             [keyValueParis addObject:obj];
