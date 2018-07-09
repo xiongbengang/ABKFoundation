@@ -11,3 +11,10 @@
 @interface ABKNetworkLogger : NSObject <YTKRequestAccessory>
 
 @end
+
+
+@interface YTKBaseRequest (ABKNetwokLog)
+
+- (NSString *)abk_responseDescription;
+
+@end

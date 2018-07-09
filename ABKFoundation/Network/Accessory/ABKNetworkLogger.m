@@ -44,8 +44,17 @@
     NSLog(@"===startTime:%@ endTime:%@ cost:%@", startTime, endTime, @(cost));
     NSLog(@"------- token: %@", rq.currentRequest.allHTTPHeaderFields[@"Authorization"]);
     NSLog(@"------- request:%@", [rq description]);
-    NSLog(@"------- response:%@", [rq.responseJSONObject description]);
+    NSLog(@"------- response:%@", [rq abk_responseDescription]);
     NSLog(@"*******************************");
+}
+
+@end
+
+@implementation YTKBaseRequest (ABKNetwokLog)
+
+- (NSString *)abk_responseDescription
+{
+    return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.responseJSONObject options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
 }
 
 @end
