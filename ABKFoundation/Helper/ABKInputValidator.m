@@ -42,14 +42,15 @@
     return YES;
 }
 
-// 备注：中文代码范围0x4E00~0x9FA5，
 + (BOOL)isValidChinese:(NSString *)inputText
 {
     NSString *chineseRegex = @"^[\\u4e00-\\u9fa5]+$";
-    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", inputText];
-    return [pre evaluateWithObject:self];
+    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", chineseRegex];
+    BOOL isChinese = [pre evaluateWithObject:inputText];
+    return isChinese;
 }
 
+// 备注：中文代码范围0x4E00~0x9FA5
 + (BOOL)hasChineseText:(NSString *)inputText
 {
     for(int i = 0; i < [inputText length]; i++){
