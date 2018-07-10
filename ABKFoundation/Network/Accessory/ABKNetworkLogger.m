@@ -44,7 +44,11 @@
     NSLog(@"===startTime:%@ endTime:%@ cost:%@", startTime, endTime, @(cost));
     NSLog(@"------- token: %@", rq.currentRequest.allHTTPHeaderFields[@"Authorization"]);
     NSLog(@"------- request:%@", [rq description]);
-    NSLog(@"------- response:%@", [rq abk_responseDescription]);
+    if (rq.error) {
+        NSLog(@"------- error:%@", [rq.error description]);
+    } else {
+        NSLog(@"------- response:%@", [rq abk_responseDescription]);
+    }
     NSLog(@"*******************************");
 }
 
