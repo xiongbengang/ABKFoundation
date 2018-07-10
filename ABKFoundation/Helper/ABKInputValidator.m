@@ -15,31 +15,50 @@
     return [inputText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-+ (BOOL)isValidatePhoneNumber:(NSString *)phoneNumber
++ (BOOL)isValidPhoneNumber:(NSString *)phoneNumber
 {
     phoneNumber = [self stringByTrimString:phoneNumber];
     if (phoneNumber.length != 11) {
         return NO;
     }
-    return [self isValidateNumber:phoneNumber];
+    return [self isValidNumber:phoneNumber];
 }
 
-+ (BOOL)isValidateSMCode:(NSString *)code
++ (BOOL)isValidSMCode:(NSString *)code
 {
     code = [self stringByTrimString:code];
     if (code.length != 6) {
         return NO;
     }
-    return [self isValidateNumber:code];
+    return [self isValidNumber:code];
 }
 
-+ (BOOL)isValidateNumber:(NSString *)inputText
++ (BOOL)isValidNumber:(NSString *)inputText
 {
     NSString *trimmedString = [inputText stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
     if (trimmedString.length) {
         return NO;
     }
     return YES;
+}
+
+// 备注：中文代码范围0x4E00~0x9FA5，
++ (BOOL)isValidChinese:(NSString *)inputText
+{
+    NSString *chineseRegex = @"^[\\u4e00-\\u9fa5]+$";
+    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", inputText];
+    return [pre evaluateWithObject:self];
+}
+
++ (BOOL)hasChineseText:(NSString *)inputText
+{
+    for(int i = 0; i < [inputText length]; i++){
+        unichar c = [inputText characterAtIndex:i];
+        if( c >= 0x4e00 && c <= 0x9FA5) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end
