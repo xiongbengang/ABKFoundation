@@ -20,8 +20,6 @@
 
 @interface ABKOrderSegmentView : UIView
 
-@property (nonatomic, strong) UIView *bottomLine;
-
 @property (nonatomic, strong) UIColor *flagColor;
 @property (nonatomic, assign) CGFloat flagHeight;
 @property (nonatomic, assign) BOOL flagEqualToText;

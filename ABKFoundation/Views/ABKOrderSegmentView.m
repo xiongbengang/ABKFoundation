@@ -13,8 +13,10 @@
 
 @interface ABKOrderSegmentView ()
 
-@property (nonatomic, copy) NSArray<UIButton *> *buttons;
+@property (nonatomic, strong) UIView *bottomLine;
 @property (nonatomic, strong) UIView *flagView;
+
+@property (nonatomic, copy) NSArray<UIButton *> *buttons;
 @property (nonatomic, assign, readwrite) NSInteger selectedIndex;
 
 @end
@@ -83,6 +85,7 @@
     self.buttons = btns;
     
     self.bottomLine = [self abk_addBottomHorizontalSeparatorWithInsets:UIEdgeInsetsZero];
+    self.bottomLine.hidden = YES;
     
     UIView *flagView = [[UIView alloc] init];
     [self addSubview:flagView];
