@@ -10,5 +10,6 @@
 @interface UIDevice (ABKAdditions)
 
 - (NSString *)abk_deviceId;
+- (NSString *)abk_deviceType;
 
 @end
