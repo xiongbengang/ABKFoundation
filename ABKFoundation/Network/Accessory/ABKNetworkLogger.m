@@ -42,7 +42,7 @@
     NSTimeInterval cost = [[NSDate date] timeIntervalSinceDate:self.startTime];
     
     NSLog(@"===startTime:%@ endTime:%@ cost:%@", startTime, endTime, @(cost));
-    NSLog(@"------- token: %@", rq.currentRequest.allHTTPHeaderFields[@"Authorization"]);
+    NSLog(@"------- header: %@", [rq.currentRequest.allHTTPHeaderFields description]);
     NSLog(@"------- request:%@", [rq description]);
     if (rq.error) {
         NSLog(@"------- error:%@", [rq.error description]);
