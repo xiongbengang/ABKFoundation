@@ -36,7 +36,7 @@
         return;
     }
     YTKBaseRequest *rq = (YTKBaseRequest *)request;
-    NSLog(@"*******************************");
+    NSLog(@"开始打印请求信息 *******************************");
     NSString *startTime = [[self dateFormatter] stringFromDate:self.startTime];
     NSString *endTime = [[self dateFormatter] stringFromDate:[NSDate date]];
     NSTimeInterval cost = [[NSDate date] timeIntervalSinceDate:self.startTime];
@@ -49,7 +49,7 @@
     } else {
         NSLog(@"------- response:%@", [rq abk_responseDescription]);
     }
-    NSLog(@"*******************************");
+    NSLog(@"结束打印请求信息 *******************************");
 }
 
 @end
