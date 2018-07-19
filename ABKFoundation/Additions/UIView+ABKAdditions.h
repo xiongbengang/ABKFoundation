@@ -14,6 +14,8 @@
 #define ABKScreenHeight ([UIScreen mainScreen].bounds.size.height)
 #define ABKStatusBarHeight (ABKGetStatusBarHeight())
 #define ABKNavigationBarHeight (44)
+#define ABKTabbarBarHeight (49)
+#define ABKTabbarBarBottomHeight ([[UIApplication sharedApplication].keyWindow abk_safeAreaInsets].bottom+ABKTabbarBarHeight)
 #define ABKNavigationTopHeight (ABKStatusBarHeight+ABKNavigationBarHeight)
 #define ABKSeparatorHeight (1.0/[UIScreen mainScreen].scale)
 
