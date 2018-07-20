@@ -35,4 +35,6 @@ UIKIT_EXTERN CGFloat ABKGetStatusBarHeight(void);
 @property (nonatomic, assign) CGPoint abk_origin;
 @property (nonatomic, assign, readonly) UIEdgeInsets abk_safeAreaInsets;
 
++ (instancetype)abk_viewFromXib;
+
 @end
