@@ -29,6 +29,7 @@
     
     self = [super initWithFrame:CGRectMake(0, 0, ABKScreenWidth, height)];
     if (self) {
+        _keepInFront = YES;
         _contentView = contentView;
         _contentViewInsets = contentInsets;
         _contentHeight = contentHeight;
