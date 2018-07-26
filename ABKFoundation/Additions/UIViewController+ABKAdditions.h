@@ -10,7 +10,7 @@
 
 @protocol ABKViewControllerEntryProtocol <NSObject>
 
-@property (nonatomic, copy) NSString *viewControllerEntryFlag; // 返回标识
+@property (nonatomic, copy, readonly) NSString *viewControllerEntryFlag; // 返回标识
 
 @end
 
