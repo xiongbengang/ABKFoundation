@@ -70,6 +70,7 @@
     if (self.hasPrepared) {
         return;
     }
+    // Fix Me 循环引用 依赖父类的clearCompletionBlock
     YTKRequestCompletionBlock oldSuccessBlock = [self.successCompletionBlock copy];
     YTKRequestCompletionBlock successBlock = ^(ABKNetworkRequest *request) {
         if (oldSuccessBlock) {

@@ -61,6 +61,12 @@ typedef void(^ABKRequestFailed)(ABKNetworkRequest *request);
 
 - (BOOL)isResponseSucceed;
 
+- (void)toggleAccessoriesDidResponseSuccess;
+
+- (void)toggleAccessoriesDidResponseError;
+
+- (void)toggleAccessoriesDidRequestFailed;
+
 - (void)startWithResponseSuccess:(ABKRequestReponseSuccess)success responseError:(ABKRequestReponseError)responseError requestFailed:(ABKRequestFailed)requestFailed;
 
 @end
