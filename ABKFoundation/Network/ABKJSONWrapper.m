@@ -27,7 +27,7 @@
     return self;
 }
 
-- (id)objectAtIndexedSubscript:(NSUInteger)idx
+- (instancetype)objectAtIndexedSubscript:(NSUInteger)idx
 {
     id result = nil;
     if ([self.rawJSON isKindOfClass:[NSArray class]] && idx < ((NSArray *)self.rawJSON).count) {
@@ -39,7 +39,7 @@
     return [ABKJSONWrapper wrapperWithJSON:result];
 }
 
-- (id)objectForKeyedSubscript:(id<NSCopying>)key
+- (instancetype)objectForKeyedSubscript:(id<NSCopying>)key
 {
     id result = nil;
     if ([self.rawJSON isKindOfClass:[NSDictionary class]]) {

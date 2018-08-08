@@ -23,8 +23,8 @@
 
 - (instancetype)initWithJSON:(id)rawJSON;
 
-- (id)objectAtIndexedSubscript:(NSUInteger)idx;
+- (instancetype)objectAtIndexedSubscript:(NSUInteger)idx;
 
-- (id)objectForKeyedSubscript:(id<NSCopying>)key;
+- (instancetype)objectForKeyedSubscript:(id<NSCopying>)key;
 
 @end
