@@ -11,7 +11,10 @@
 
 @property (nonatomic, strong, readonly) id rawJSON;
 
-@property (nonatomic, copy, readonly) NSString *stringValue;
+@property (nonatomic, copy, readonly) NSDictionary *dictionary;
+@property (nonatomic, copy, readonly) NSArray *array;
+@property (nonatomic, copy, readonly) NSString *string;
+
 @property (nonatomic, assign, readonly) NSInteger integerValue;
 @property (nonatomic, assign, readonly) double doubleValue;
 @property (nonatomic, assign, readonly) BOOL boolValue;

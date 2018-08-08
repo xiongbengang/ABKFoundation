@@ -51,7 +51,7 @@
     return [ABKJSONWrapper wrapperWithJSON:result];
 }
 
-- (NSString *)stringValue
+- (NSString *)string
 {
     if ([self.rawJSON isKindOfClass:[NSString class]]) {
         return self.rawJSON;
@@ -87,6 +87,22 @@
         return [self.rawJSON boolValue];
     }
     return 0;
+}
+
+- (NSDictionary *)dictionary
+{
+    if ([self.rawJSON isKindOfClass:[NSDictionary class]]) {
+        return (NSDictionary *)self.rawJSON;
+    }
+    return nil;
+}
+
+- (NSArray *)array
+{
+    if ([self.rawJSON isKindOfClass:[NSArray class]]) {
+        return (NSArray *)self.rawJSON;
+    }
+    return nil;
 }
 
 @end
