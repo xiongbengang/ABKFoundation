@@ -11,6 +11,9 @@
 
 @interface ABKNetworkBaseItem : ABKBaseItem
 
+@property (nonatomic, assign) NSInteger code;
+@property (nonatomic, copy) NSString *message;
+
 @property (nonatomic, copy) NSString *error;
 @property (nonatomic, copy) NSString *error_description;
 @property (nonatomic, assign) NSInteger errcode;
