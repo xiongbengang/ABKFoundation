@@ -70,6 +70,7 @@
     if (self.hasPrepared) {
         return;
     }
+    // Fix Me 循环引用 依赖父类的clearCompletionBlock
     YTKRequestCompletionBlock oldSuccessBlock = [self.successCompletionBlock copy];
     YTKRequestCompletionBlock successBlock = ^(ABKNetworkRequest *request) {
         if (oldSuccessBlock) {
@@ -152,6 +153,7 @@
     if ([self.responseJSONObject isKindOfClass:[NSDictionary class]]) {
         id dataJSON = self.responseJSONObject[@"data"];
         self.responseItem.dataJSON = (dataJSON != (id)kCFNull) ? dataJSON : nil;
+        self.responseItem.wrapperedData = (dataJSON != (id)kCFNull) ? [ABKJSONWrapper wrapperWithJSON:dataJSON] : nil;
         if (self.dataClass) {
             if ([dataJSON isKindOfClass:[NSArray class]]) {
                 self.responseItem.parsedData = [NSArray yy_modelArrayWithClass:self.dataClass json:dataJSON];

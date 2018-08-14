@@ -144,4 +144,9 @@ CGFloat ABKGetStatusBarHeight() {
     }
 }
 
++ (instancetype)abk_viewFromXib
+{
+    return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
+}
+
 @end

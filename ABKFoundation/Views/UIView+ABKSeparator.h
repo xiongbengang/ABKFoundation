@@ -17,4 +17,7 @@
 - (UIView *)abk_addLeftVerticalSeparatorWithInsets:(UIEdgeInsets)insets;
 - (UIView *)abk_addRightVerticalSeparatorWithInsets:(UIEdgeInsets)insets;
 
+- (void)abk_remakeLeadingConstraints:(CGFloat)constaint;
+- (void)abk_remakeTrailingConstraints:(CGFloat)constaint;
+
 @end

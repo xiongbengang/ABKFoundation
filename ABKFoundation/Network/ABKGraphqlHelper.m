@@ -103,20 +103,37 @@
 
 + (NSString *)graphForClass:(Class)cls
 {
-    return [self graphForClass:cls blacklist:nil];
+    return [self graphForClass:cls blacklist:nil recursive:NO];
+}
+
++ (NSString *)graphForClass:(Class)cls recursive:(BOOL)recursive
+{
+    return [self graphForClass:cls blacklist:nil recursive:recursive];
 }
 
 + (NSString *)graphForClass:(Class)cls blacklist:(NSArray<NSString *> *)aBlacklist
 {
+    return [self graphForClass:cls blacklist:aBlacklist recursive:NO];
+}
+
++ (NSString *)graphForClass:(Class)cls blacklist:(NSArray<NSString *> *)aBlacklist recursive:(BOOL)recursive
+{
+    YYClassInfo *clsInfo = [YYClassInfo classInfoWithClass:cls];
+    NSMutableArray<YYClassPropertyInfo *> *propertyInfos = [NSMutableArray array];
+    do {
+        [propertyInfos addObjectsFromArray:clsInfo.propertyInfos.allValues];
+        clsInfo = clsInfo.superClassInfo;
+    } while (recursive && [clsInfo.cls isSubclassOfClass:[ABKBaseItem class]]);
+    
+    NSMutableArray *properties = [NSMutableArray arrayWithCapacity:propertyInfos.count];
+    
     NSDictionary *modelCustomMapper = nil;
     if ([cls respondsToSelector:@selector(modelCustomPropertyMapper)]) {
         modelCustomMapper = [cls modelCustomPropertyMapper];
     }
     NSSet *graphBlacklist = [self graphBlacklistForClass:cls blacklist:aBlacklist];
     
-    YYClassInfo *classInfo = [YYClassInfo classInfoWithClass:cls];
-    NSMutableArray *properties = [NSMutableArray arrayWithCapacity:classInfo.propertyInfos.count];
-    for (YYClassPropertyInfo *property in classInfo.propertyInfos.allValues) {
+    for (YYClassPropertyInfo *property in propertyInfos) {
         if ([cls respondsToSelector:@selector(graphForProperty:)]) {
             NSString *graph = [(id<ABKNetworkResponseGraph>)cls graphForProperty:property.name];
             if (graph) {

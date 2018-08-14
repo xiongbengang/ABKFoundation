@@ -8,8 +8,11 @@
 
 #import "UIView+ABKSeparator.h"
 #import <Masonry/Masonry.h>
+#import <objc/runtime.h>
 
 static UIColor *ABKSeparatorColor = nil;
+
+static char ABKSeparatorTypeKey;
 
 @implementation UIView (ABKSeparator)
 
@@ -96,6 +99,20 @@ static UIColor *ABKSeparatorColor = nil;
         }
     }];
     return separator;
+}
+
+- (void)abk_remakeLeadingConstraints:(CGFloat)constaint
+{
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.superview).offset(constaint);
+    }];
+}
+
+- (void)abk_remakeTrailingConstraints:(CGFloat)constaint
+{
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.superview).offset(-constaint);
+    }];
 }
 
 @end

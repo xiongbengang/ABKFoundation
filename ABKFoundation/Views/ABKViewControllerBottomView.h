@@ -11,6 +11,7 @@
 
 @property (nonatomic, strong, readonly) UIView *contentView;
 @property (nonatomic, assign, readonly) CGFloat excludeSafeAreaHeight;
+@property (nonatomic, assign) BOOL keepInFront;
 
 - (instancetype)initWithContentView:(UIView *)contentView
                       contentHeight:(CGFloat)contentHeight

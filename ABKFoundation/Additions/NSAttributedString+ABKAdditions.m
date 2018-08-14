@@ -14,7 +14,7 @@
 {
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] init];
     for (ABKTextAttribute *textAttribute in attributes) {
-        NSMutableDictionary *commonAttributes = [NSMutableDictionary dictionaryWithDictionary:@{NSFontAttributeName: [UIFont systemFontOfSize:textAttribute.fontSize], NSForegroundColorAttributeName: textAttribute.fontColor}];
+        NSMutableDictionary *commonAttributes = [NSMutableDictionary dictionaryWithDictionary:@{NSFontAttributeName: textAttribute.font, NSForegroundColorAttributeName: textAttribute.textColor}];
         if (textAttribute.otherAttributes.count) {
             [commonAttributes addEntriesFromDictionary:textAttribute.otherAttributes];
         }
@@ -29,36 +29,46 @@
 
 @implementation ABKTextAttribute
 
-+ (instancetype)textAttributeWithText:(NSString *)text fontSize:(CGFloat)fontSize fontColor:(UIColor *)fontColor
++ (instancetype)textAttributeWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor
 {
-    return [[self alloc] initWithText:text fontSize:fontSize fontColor:fontColor];
+    return [[ABKTextAttribute alloc] initWithText:text font:font textColor:textColor];
 }
 
-- (instancetype)initWithText:(NSString *)text fontSize:(CGFloat)fontSize fontColor:(UIColor *)fontColor
++ (instancetype)textAttributeWithText:(NSString *)text fontSize:(CGFloat)fontSize textColor:(UIColor *)textColor
+{
+    return [[ABKTextAttribute alloc] initWithText:text fontSize:fontSize textColor:textColor];
+}
+
+- (instancetype)initWithText:(NSString *)text fontSize:(CGFloat)fontSize textColor:(UIColor *)textColor
+{
+    return [self initWithText:text font:[UIFont systemFontOfSize:fontSize] textColor:textColor];
+}
+
+- (instancetype)initWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor
 {
     self = [super init];
     if (self) {
         _text = [text copy];
-        _fontSize = fontSize;
-        _fontColor = fontColor;
+        _font = font;
+        _textColor = textColor;
     }
     return self;
 }
 
-- (CGFloat)fontSize
+- (UIFont *)font
 {
-    if (_fontSize <= 0) {
-        _fontSize = 17;
+    if (!_font) {
+        _font = [UIFont systemFontOfSize:17];
     }
-    return _fontSize;
+    return _font;
 }
 
-- (UIColor *)fontColor
+- (UIColor *)textColor
 {
-    if (!_fontColor) {
-        _fontColor = [UIColor blackColor];
+    if (!_textColor) {
+        _textColor = [UIColor blackColor];
     }
-    return _fontColor;
+    return _textColor;
 }
 
 @end

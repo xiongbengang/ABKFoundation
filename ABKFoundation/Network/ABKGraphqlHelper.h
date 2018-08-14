@@ -14,6 +14,10 @@
 
 + (NSString *)graphForClass:(Class)cls;
 
++ (NSString *)graphForClass:(Class)cls recursive:(BOOL)recursive;
+
 + (NSString *)graphForClass:(Class)cls blacklist:(NSArray<NSString *> *)aBlacklist;
+
++ (NSString *)graphForClass:(Class)cls blacklist:(NSArray<NSString *> *)aBlacklist recursive:(BOOL)recursive;
 
 @end

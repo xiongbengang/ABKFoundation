@@ -19,12 +19,17 @@
 @interface ABKTextAttribute : NSObject
 
 @property (nonatomic, copy) NSString *text;
-@property (nonatomic, assign) CGFloat fontSize;
-@property (nonatomic, strong) UIColor *fontColor;
+@property (nonatomic, strong) UIColor *textColor;
+
+@property (nonatomic, strong) UIFont *font;
 @property (nonatomic, copy) NSDictionary *otherAttributes;
 
-+ (instancetype)textAttributeWithText:(NSString *)text fontSize:(CGFloat)fontSize fontColor:(UIColor *)fontColor;
++ (instancetype)textAttributeWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor;
 
-- (instancetype)initWithText:(NSString *)text fontSize:(CGFloat)fontSize fontColor:(UIColor *)fontColor;
++ (instancetype)textAttributeWithText:(NSString *)text fontSize:(CGFloat)fontSize textColor:(UIColor *)textColor;
+
+- (instancetype)initWithText:(NSString *)text fontSize:(CGFloat)fontSize textColor:(UIColor *)textColor;
+
+- (instancetype)initWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor;
 
 @end
