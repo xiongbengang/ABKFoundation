@@ -152,7 +152,6 @@
     self.responseItem = [ABKNetworkBaseItem modelWithJSON:self.responseJSONObject];
     if ([self.responseJSONObject isKindOfClass:[NSDictionary class]]) {
         id dataJSON = self.responseJSONObject[@"data"];
-        self.responseItem.dataJSON = (dataJSON != (id)kCFNull) ? dataJSON : nil;
         self.responseItem.wrapperedData = (dataJSON != (id)kCFNull) ? [ABKJSONWrapper wrapperWithJSON:dataJSON] : nil;
         if (self.dataClass) {
             if ([dataJSON isKindOfClass:[NSArray class]]) {

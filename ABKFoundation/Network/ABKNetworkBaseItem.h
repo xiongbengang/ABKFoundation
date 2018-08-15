@@ -19,8 +19,7 @@
 @property (nonatomic, assign) NSInteger errcode;
 
 @property (nonatomic, strong) id parsedData;      // 解析后的data
-@property (nonatomic, strong) id dataJSON DEPRECATED_MSG_ATTRIBUTE("use wrapperedData instead");     // 原始的data JSON结构
-@property (nonatomic, strong) ABKJSONWrapper *wrapperedData;
+@property (nonatomic, strong) ABKJSONWrapper *wrapperedData;  /// 原始的data JSON结构
 @property (nonatomic, copy) NSArray<ABKNetworkErrorItem *> *errors;
 
 @end
