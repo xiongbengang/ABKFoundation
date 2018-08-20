@@ -9,13 +9,4 @@
 
 @implementation ABKNetworkBaseItem
 
-+ (nullable NSDictionary<NSString *, id> *)modelContainerPropertyGenericClass
-{
-    return @{@"errors": [ABKNetworkErrorItem class]};
-}
-
-@end
-
-
-@implementation ABKMutationResult
 @end
