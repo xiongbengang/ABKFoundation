@@ -86,7 +86,7 @@
         [self.rawJSON isKindOfClass:[NSString class]]) {
         return [self.rawJSON boolValue];
     }
-    return 0;
+    return NO;
 }
 
 - (NSDictionary *)dictionary
