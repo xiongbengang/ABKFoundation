@@ -151,7 +151,7 @@
     [super requestCompletePreprocessor];
     self.responseItem = [ABKNetworkBaseItem modelWithJSON:self.responseJSONObject];
     if ([self.responseJSONObject isKindOfClass:[NSDictionary class]]) {
-        id dataJSON = self.responseJSONObject[@"data"];
+        id dataJSON = [self dataJSONForParse];
         self.responseItem.wrapperedData = (dataJSON != (id)kCFNull) ? [ABKJSONWrapper wrapperWithJSON:dataJSON] : nil;
         if (self.dataClass) {
             if ([dataJSON isKindOfClass:[NSArray class]]) {
@@ -161,6 +161,12 @@
             }
         }
     }
+}
+
+- (id)dataJSONForParse
+{
+    id dataJSON = self.responseJSONObject[@"data"];
+    return dataJSON;
 }
 
 - (void)start

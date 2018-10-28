@@ -55,6 +55,8 @@ typedef void(^ABKRequestFailed)(ABKNetworkRequest *request);
 
 @property (nonatomic, strong, readonly) ABKNetworkBaseItem *responseItem;
 
+- (id)dataJSONForParse;
+
 - (void)prepare;
 
 - (void)requestCompletePreprocessor NS_REQUIRES_SUPER;
